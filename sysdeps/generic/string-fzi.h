@@ -45,7 +45,7 @@ ctz (find_t c)
    the (memory order) index of the first byte (in memory order) that is
    non-zero.  */
 static __always_inline unsigned int
-index_first (op_t c)
+index_first (find_t c)
 {
   int r;
   if (__BYTE_ORDER == __LITTLE_ENDIAN)
