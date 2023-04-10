@@ -35,6 +35,11 @@ callPackage ./common.nix {inherit stdenv src version;} {
     )
   ];
 
+  ${if stdenv.hostPlatform != stdenv.buildPlatform then "prePatch" else null} = ''
+    export CC="${stdenv.cc}/bin/${stdenv.cc.targetPrefix}cc"
+    export CC_FOR_BUILD="${buildPackages.stdenv.cc}/bin/${buildPackages.stdenv.cc.targetPrefix}cc"
+  '';
+
   buildPhase =
     ''
       # Awful hack: `localedef' doesn't allow the path to `locale-archive'
